@@ -1,0 +1,16 @@
+div.dokuwiki ins {
+    background: #cfc;
+    color: #393;
+    text-decoration: none;
+    border-bottom: 1px dotted #393;
+}
+ 
+div.dokuwiki del {
+    background: #fcc;
+    color: #933;
+    text-decoration: line-through;
+}
+
+div.dokuwiki span.highlighted {
+    background-color: #ff6;
+}
