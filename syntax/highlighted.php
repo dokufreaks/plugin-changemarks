@@ -25,12 +25,12 @@ class syntax_plugin_changemarks_highlighted extends DokuWiki_Syntax_Plugin {
    */
   function getInfo(){
     return array(
-      'author' => 'Esther Brunner',
-      'email'  => 'wikidesign@gmail.com',
-      'date'   => '2007-08-13',
+      'author' => 'Gina Häußge, Michael Klier, Esther Brunner',
+      'email'  => 'dokuwiki@chimeric.de',
+      'date'   => '2008-02-12',
       'name'   => 'Changemarks Plugin (highlighted)',
       'desc'   => 'Highlight text',
-      'url'    => 'http://www.wikidesign.ch/en/plugin/changemarks/start',
+      'url'    => 'http://wiki.splitbrain.org/plugin:changemarks',
     );
   }
 
