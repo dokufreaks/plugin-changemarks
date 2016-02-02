@@ -48,7 +48,7 @@ class syntax_plugin_changemarks_highlighted extends DokuWiki_Syntax_Plugin {
     /**
      * Handle the match
      */
-    function handle($match, $state, $pos, &$handler) {
+    function handle($match, $state, $pos, Doku_Handler $handler) {
         switch ($state) {
 
             // entry pattern with optional title
@@ -74,7 +74,7 @@ class syntax_plugin_changemarks_highlighted extends DokuWiki_Syntax_Plugin {
     /**
      * Create output
      */
-    function render($mode, &$renderer, $data) {
+    function render($mode, Doku_Renderer $renderer, $data) {
         if (($mode == 'xhtml') && (is_array($data))) {
             switch ($data[0]) {
                 case DOKU_LEXER_ENTER:
