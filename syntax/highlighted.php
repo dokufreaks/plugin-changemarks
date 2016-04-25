@@ -20,20 +20,6 @@ class syntax_plugin_changemarks_highlighted extends DokuWiki_Syntax_Plugin {
 
     var $ins = 'plugin_changemarks_highlighted'; // instruction of this plugin
 
-    /**
-     * return some info
-     */
-    function getInfo() {
-        return array(
-                'author' => 'Gina Häußge, Michael Klier, Esther Brunner',
-                'email'  => 'dokuwiki@chimeric.de',
-                'date'   => '2008-02-12',
-                'name'   => 'Changemarks Plugin (highlighted)',
-                'desc'   => 'Highlight text',
-                'url'    => 'http://wiki.splitbrain.org/plugin:changemarks',
-                );
-    }
-
     function getType() { return 'formatting'; }
     function getSort() { return 123; }
 
