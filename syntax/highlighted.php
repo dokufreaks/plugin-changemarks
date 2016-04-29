@@ -19,6 +19,7 @@ require_once(DOKU_PLUGIN.'syntax.php');
 class syntax_plugin_changemarks_highlighted extends DokuWiki_Syntax_Plugin {
 
     var $ins = 'plugin_changemarks_highlighted'; // instruction of this plugin
+    static protected $helper = NULL;
 
     function getType() { return 'formatting'; }
     function getSort() { return 123; }
@@ -61,20 +62,41 @@ class syntax_plugin_changemarks_highlighted extends DokuWiki_Syntax_Plugin {
      * Create output
      */
     function render($mode, Doku_Renderer $renderer, $data) {
-        if (($mode == 'xhtml') && (is_array($data))) {
-            switch ($data[0]) {
-                case DOKU_LEXER_ENTER:
-                    $title = ($data[1] ? ' title="'.hsc($data[1]).'"' : '');
-                    $renderer->doc .= '<span class="highlighted"'.$title.'>';
-                    return true;
-                case DOKU_LEXER_UNMATCHED:
-                    $renderer->doc .= hsc($data[1]);
-                    return true;
-                case DOKU_LEXER_EXIT:
-                    $renderer->doc .= '</span>';
-                    return true;
-                default:
-                    return false;
+        if (is_array($data)) {
+            if (($mode == 'xhtml') && (is_array($data))) {
+                switch ($data[0]) {
+                    case DOKU_LEXER_ENTER:
+                        $title = ($data[1] ? ' title="'.hsc($data[1]).'"' : '');
+                        $renderer->doc .= '<span class="highlighted"'.$title.'>';
+                        return true;
+                    case DOKU_LEXER_UNMATCHED:
+                        $renderer->doc .= hsc($data[1]);
+                        return true;
+                    case DOKU_LEXER_EXIT:
+                        $renderer->doc .= '</span>';
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+            if ($mode == 'odt') {
+                if ($this->helper==NULL) {
+                    $this->helper = plugin_load('helper', 'changemarks');
+                }
+                switch ($data[0]) {
+                    case DOKU_LEXER_ENTER:
+                        $title = ($data[1] ? ' title="'.hsc($data[1]).'"' : '');
+                        $this->helper->renderODTOpenSpan($renderer, 'span', 'dokuwiki highlighted');
+                        return true;
+                    case DOKU_LEXER_UNMATCHED:
+                        $renderer->doc .= hsc($data[1]);
+                        return true;
+                    case DOKU_LEXER_EXIT:
+                        $this->helper->renderODTCloseSpan($renderer);
+                        return true;
+                    default:
+                        return false;
+                }
             }
         }
         return false;
