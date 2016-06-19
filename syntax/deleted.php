@@ -89,13 +89,17 @@ class syntax_plugin_changemarks_deleted extends DokuWiki_Syntax_Plugin {
                 switch ($data[0]) {
                     case DOKU_LEXER_ENTER:
                         $title = ($data[1] ? ' title="'.hsc($data[1]).'"' : '');
-                        $this->helper->renderODTOpenSpan($renderer, 'span', 'dokuwiki del');
+                        if (class_exists('ODTDocument')) {
+                            $renderer->_odtSpanOpenUseCSS ('del');
+                        }
                         return true;
                     case DOKU_LEXER_UNMATCHED:
-                        $renderer->doc .= hsc($data[1]);
+                        $renderer->cdata($data[1]);
                         return true;
                     case DOKU_LEXER_EXIT:
-                        $this->helper->renderODTCloseSpan($renderer);
+                        if (class_exists('ODTDocument')) {
+                            $renderer->_odtSpanClose();
+                        }
                         return true;
                     default:
                         return false;
