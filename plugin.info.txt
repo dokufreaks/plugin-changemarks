@@ -1,7 +1,7 @@
 base   changemarks
 author Gina Häußge, Michael Klier, Esther Brunner
 email  dokuwiki@chimeric.de
-date   2016-04-29
+date   2017-02-25
 name   Changemarks Plugin
 desc   Mark text as deleted, highlighted or inserted
 url    https://www.dokuwiki.org/plugin:changemarks
